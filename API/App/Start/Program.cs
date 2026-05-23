@@ -1,27 +1,19 @@
+using Microsoft.AspNetCore.Builder;
+using System.Threading.Tasks;
+
 namespace API.App.Start
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            #region Objects
+            WebApplication App;
+            #endregion
 
-            // Add services to the container.
+            App = await Startup.InitAppAsync(args: args);
 
-            builder.Services.AddControllers();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+            App.Run();
         }
     }
 }
